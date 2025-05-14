@@ -1,19 +1,24 @@
 import bsf.BreadthFirstSearch;
+import dto.Country;
 
 public class ApplicationMain {
   
   public static void main(String[] args) {
+    
+    Country country01 = new Country("Romans Dawn");
+    Country country02 = new Country("Alabasta");
+    Country country03 = new Country("Dressrosa");
+    Country country04 = new Country("Drum");
     BreadthFirstSearch bfs = new BreadthFirstSearch(4);
-    bfs.addEdge(0, 1);
-    bfs.addEdge(0, 2);
-    bfs.addEdge(1, 2);
-    bfs.addEdge(2, 0);
-    bfs.addEdge(2, 3);
-    bfs.addEdge(3, 3);
 
-    int source = 2;
-    System.out.println("Breadth First Traversal starting from vertex " + source + ": ");
-    bfs.searchByBreadthFirst(source);
+    bfs.addEdge(country01, country02);
+    bfs.addEdge(country01, country03);
+    bfs.addEdge(country02, country03);
+    bfs.addEdge(country03, country04);
+    bfs.addEdge(country04, country04);
+
+    System.out.println("Breadth First Traversal starting from " + country03.getName() + ": ");
+    bfs.searchByBreadthFirst(country03);
 
   }
 
