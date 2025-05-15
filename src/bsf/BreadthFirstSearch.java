@@ -4,9 +4,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import dto.Country;
+
 public class BreadthFirstSearch {
   private int vertices;
-  private LinkedList<Integer>[] adj; // Adjacency list representation
+  private LinkedList<Country>[] adj; // Adjacency list representation
 
   public BreadthFirstSearch(int vertices) {
     this.vertices = vertices;
@@ -17,30 +19,30 @@ public class BreadthFirstSearch {
   }
 
   // Add an edge to the graph
-  public void addEdge(int v, int w) {
-    adj[v].add(w);
-    adj[w].add(v);
+  public void addEdge(Country v, Country w) {
+    adj[v.getId()].add(w);
+    adj[w.getId()].add(v);
   }
 
   // Breadth-First Search traversal from a given source node 'source'
-  public void searchByBreadthFirst(int source) {
+  public void searchByBreadthFirst(Country source) {
     boolean[] visited = new boolean[this.vertices];
     Arrays.fill(visited, false);
 
-    Queue<Integer> queue = new LinkedList<>();
+    Queue<Country> queue = new LinkedList<>();
 
-    visited[source] = true;
+    visited[source.getId()] = true;
     queue.offer(source);
 
     // Get all adjacent vertices of the dequeued vertex
     // If a neighbor has not been visited, then mark it as visited and enqueue it
     while (!queue.isEmpty()) {
-      int current_node = queue.poll();
-      System.out.print(current_node + " -> ");
+      Country currentNode = queue.poll();
+      System.out.print(currentNode.getId() + ".- " + currentNode.getName() + " -> ");
 
-      for (int neighbor : adj[current_node]) {
-        if (!visited[neighbor]) {
-          visited[neighbor] = true;
+      for (Country neighbor : adj[currentNode.getId()]) {
+        if (!visited[neighbor.getId()]) {
+          visited[neighbor.getId()] = true;
           queue.offer(neighbor);
         }
       }
