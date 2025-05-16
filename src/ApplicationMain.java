@@ -1,3 +1,5 @@
+import java.util.List;
+
 import bsf.BreadthFirstSearch;
 import dto.Country;
 
@@ -5,20 +7,23 @@ public class ApplicationMain {
   
   public static void main(String[] args) {
     
-    Country country01 = new Country("Romans Dawn");
-    Country country02 = new Country("Alabasta");
-    Country country03 = new Country("Dressrosa");
-    Country country04 = new Country("Drum");
-    BreadthFirstSearch bfs = new BreadthFirstSearch(4);
+    List<Country> countries = List.of( 
+      new Country("Romans Dawn"),
+      new Country("Alabasta"),
+      new Country("Dressrosa"),
+      new Country("Drum")
+     );
 
-    bfs.addEdge(country01, country02);
-    bfs.addEdge(country01, country03);
-    bfs.addEdge(country02, country03);
-    bfs.addEdge(country03, country04);
-    bfs.addEdge(country04, country04);
+    BreadthFirstSearch bfs = new BreadthFirstSearch(countries.size());
 
-    System.out.println("Breadth First Traversal starting from " + country03.getName() + ": ");
-    bfs.searchByBreadthFirst(country03);
+    bfs.addEdge(countries.get(0), countries.get(1));
+    bfs.addEdge(countries.get(0), countries.get(2));
+    bfs.addEdge(countries.get(1), countries.get(2));
+    bfs.addEdge(countries.get(2), countries.get(3));
+    bfs.addEdge(countries.get(3), countries.get(3));
+
+    System.out.println("Breadth First Traversal starting from " + countries.get(2).getName() + ": ");
+    bfs.searchByBreadthFirst(countries.get(2));
 
   }
 
